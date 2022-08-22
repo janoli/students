@@ -1,0 +1,9 @@
+{% if latest_alumno_list %}
+    <ul>
+    {% for alumno in latest_alumno_list %}
+        <li><a href="/alumnos/{{ alumno.id }}/">{{ alumno.nombre_completo }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No alumnos are available.</p>
+{% endif %}

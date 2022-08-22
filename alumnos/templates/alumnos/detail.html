@@ -1,0 +1,10 @@
+<h1>{{ alumno.nombre_completo }}</h1>
+<h2>Inscripto en:</h2>
+<ul>
+{% for elige in alumno.inscripcion_set.all %}
+    <li>{{ elige.curso }} </li>
+    {% for eval in alumno.inscripcion.notas_set.all %}
+        <li>{{ eval.primTrim }}</li>
+    {% endfor %}
+{% endfor %}
+</ul>
