@@ -3,8 +3,11 @@
 <ul>
 {% for elige in alumno.inscripcion_set.all %}
     <li>{{ elige.curso }} </li>
-    {% for eval in alumno.inscripcion.notas_set.all %}
-        <li>{{ eval.primTrim }}</li>
+    Notas:
+    {% for eval in elige.notas_set.all %}
+        <li>{{ eval.primTrim }} </li>
+        <li>{{ eval.seguTrim }}</li>
+        <li>{{ eval.tercTrim }}</li>
     {% endfor %}
 {% endfor %}
 </ul>

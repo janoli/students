@@ -43,11 +43,7 @@ class Curso(models.Model):
         return self.curso_text + " - " + self.cicloLectivo.año
 
 class Inscripcion(models.Model):
-    alumno = models.OneToOneField(
-        Alumno,
-        on_delete=models.CASCADE,
-        primary_key=True,
-    )    
+    alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
 
     def __str__(self):
