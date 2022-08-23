@@ -46,7 +46,7 @@ class Ficha(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE )
 
     def __str__(self):
-        return self.alumno.apellido + " - " + self.año_de_cursado
+        return self.alumno.nombre_completo() + " - " + self.año_de_cursado
 
 
 class Notas(models.Model):
