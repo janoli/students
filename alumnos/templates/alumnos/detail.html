@@ -1,13 +1,15 @@
 <h1>{{ alumno.nombre_completo }}</h1>
 <h2>Inscripto en:</h2>
 <ul>
-{% for elige in alumno.inscripcion_set.all %}
+{% for elige in alumno.ficha_set.all %}
     <li>{{ elige.curso }} </li>
     Notas:
+    <ol>
     {% for eval in elige.notas_set.all %}
         <li>{{ eval.primTrim }} </li>
         <li>{{ eval.seguTrim }}</li>
         <li>{{ eval.tercTrim }}</li>
     {% endfor %}
+    </ol>
 {% endfor %}
 </ul>

@@ -11,7 +11,6 @@ class Alumno(models.Model):
     nombre = models.CharField(max_length=100)
     dni = models.CharField(max_length=11)
     pub_date = models.DateTimeField('date published')
-    
 
     def __str__(self):
         return self.apellido + ", " + self.nombre + " (" + self.dni + ")"
@@ -38,22 +37,26 @@ class Curso(models.Model):
     curso_text = models.CharField(max_length=80)
     cicloLectivo = models.ForeignKey(CicloLectivo, on_delete=models.CASCADE)
     
-
     def __str__(self):
         return self.curso_text + " - " + self.cicloLectivo.año
 
-class Inscripcion(models.Model):
+class Ficha(models.Model):
+    año_de_cursado = models.CharField(max_length=4)
     alumno = models.ForeignKey(Alumno, on_delete=models.CASCADE)
-    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE )
 
     def __str__(self):
-        return self.alumno.apellido + " - " + self.curso.curso_text
+        return self.alumno.apellido + " - " + self.año_de_cursado
+
 
 class Notas(models.Model):
-    cursando = models.ForeignKey(Inscripcion, on_delete=models.CASCADE)
+    ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     primTrim = models.CharField(max_length=1)
     seguTrim = models.CharField(max_length=1)
     tercTrim = models.CharField(max_length=1)
 
+    class Meta:
+        verbose_name_plural = "Notas"
+
     def __str__(self):
-        return self.cursando.alumno.apellido
+        return self.ficha.alumno.nombre_completo() + " - " + self.ficha.curso.curso_text
