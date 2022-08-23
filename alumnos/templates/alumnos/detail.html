@@ -4,12 +4,20 @@
 {% for elige in alumno.ficha_set.all %}
     <li>{{ elige.curso }} </li>
     Notas:
-    <ol>
-    {% for eval in elige.notas_set.all %}
-        <li>{{ eval.primTrim }} </li>
-        <li>{{ eval.seguTrim }}</li>
-        <li>{{ eval.tercTrim }}</li>
+    <table border="1">
+        <tr align="center">
+            <th>Primer Trimestre</th>
+            <th>Segundo Trimestre</th>
+            <th>Tercer Trimestre</th>
+        </tr>
+        <tr  align="center">
+        {% for eval in elige.notas_set.all %}
+        <td>{{ eval.primTrim }}</td>
+        <td>{{ eval.seguTrim }}</td>
+        <td>{{ eval.tercTrim }}</td>
+        </tr>
     {% endfor %}
-    </ol>
+    </table>
+    
 {% endfor %}
 </ul>
