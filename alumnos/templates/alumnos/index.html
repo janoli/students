@@ -1,4 +1,16 @@
-{% if latest_alumno_list %}
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <title>Aplicacion Alumnos</title>  
+    {% load static %}  
+    <link href="{% static 'css/bootstrap.min.css' %}" >  
+    <script src="{% static 'bootstrap.min.js' %}"></script>  
+    <!--script>alert();</script-->  
+</head>  
+<body>  
+    
+    {% if latest_alumno_list %}
     <ul>
     {% for alumno in latest_alumno_list %}
         <li><a href="/alumnos/{{ alumno.id }}/">{{ alumno.nombre_completo }}</a></li>
@@ -7,3 +19,5 @@
 {% else %}
     <p>No alumnos are available.</p>
 {% endif %}
+</body>  
+</html>  

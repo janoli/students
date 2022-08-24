@@ -11,6 +11,24 @@ class Alumno(models.Model):
     nombre = models.CharField(max_length=100)
     dni = models.CharField(max_length=11)
     pub_date = models.DateTimeField('date published')
+    email = models.EmailField()
+    
+    '''
+    Dirección de correo electrónico
+    Fecha de nacimiento
+    Teléfono del trabajo
+    Teléfono particular
+    Dirección 
+    Ciudad / Estado
+    Provincia
+    Código Postal
+    País
+    Inactivo
+    Talle Remeras
+    Covid-19
+    Convenio
+
+    '''
 
     def __str__(self):
         return self.apellido + ", " + self.nombre + " (" + self.dni + ")"

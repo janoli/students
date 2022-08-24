@@ -6,7 +6,7 @@ from .models import Alumno, Curso, CicloLectivo, Ficha, Notas
 
 class FichaInline(admin.StackedInline):
     model = Ficha
-    extra = 3
+    extra = 0
 
 class NotasInline(admin.StackedInline):
     model = Notas
@@ -14,7 +14,7 @@ class NotasInline(admin.StackedInline):
 
 
 class AlumnoAdmin(admin.ModelAdmin):
-    fields = ['apellido', 'nombre', 'dni', 'pub_date']
+    #fields = ['apellido', 'nombre', 'dni', 'pub_date']
     list_display =  ('apellido', 'nombre', 'dni')
     search_fields = ['apellido']
 
@@ -31,6 +31,7 @@ class FichaAdmin(admin.ModelAdmin):
     #search_fields = ['apellido']
 
     inlines = [NotasInline]
+    list_filter = ['año_de_cursado', 'curso']
 
 
 admin.site.register(Alumno, AlumnoAdmin)
