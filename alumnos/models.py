@@ -37,7 +37,7 @@ class Alumno(models.Model):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
     def nombre_completo(self):
-        return self.apellido + ", " + self.nombre + " (DNI: " + self.dni + ")"
+        return self.apellido + ", " + self.nombre 
 
 class CicloLectivo(models.Model):   
     año = models.CharField(max_length=4)
@@ -65,6 +65,16 @@ class Ficha(models.Model):
 
     def __str__(self):
         return self.alumno.nombre_completo() + " - " + self.año_de_cursado
+
+class Pago(models.Model):
+    ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
+    fecha = models.DateField()
+    primTrim = models.CharField(max_length=1)
+    seguTrim = models.CharField(max_length=1)
+    tercTrim = models.CharField(max_length=1)
+
+    def __str__(self):
+        return self.ficha.alumno.nombre_completo() + " - " + self.ficha.curso.curso_text
 
 
 class Notas(models.Model):

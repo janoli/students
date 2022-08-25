@@ -16,7 +16,7 @@ class NotasInline(admin.StackedInline):
 class AlumnoAdmin(admin.ModelAdmin):
     #fields = ['apellido', 'nombre', 'dni', 'pub_date']
     list_display =  ('apellido', 'nombre', 'dni')
-    search_fields = ['apellido']
+    search_fields = ['apellido', 'dni']
 
     inlines = [FichaInline]
 
