@@ -1,3 +1,4 @@
+from audioop import avg
 from django.db import models
 from django.contrib import admin
 from django.utils import timezone
@@ -53,7 +54,8 @@ class CicloLectivo(models.Model):
 
 class Curso(models.Model):
     curso_text = models.CharField(max_length=80)
-    cicloLectivo = models.ForeignKey(CicloLectivo, on_delete=models.CASCADE)
+    cicloLectivo = models.ForeignKey(CicloLectivo, on_delete=models.CASCADE,
+        verbose_name='Ciclo Lectivo')
     
     def __str__(self):
         return self.curso_text + " - " + self.cicloLectivo.año
@@ -92,11 +94,70 @@ class Asignatura(models.Model):
 class Nota(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
-    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+        verbose_name='Primer Trimestre')
+    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+        verbose_name='Segundo Trimestre')
+    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+        verbose_name='Tercer Trimestre')
+    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+        verbose_name='Cuarto Trimestre')
 
     def __str__(self):
-        return self.ficha.año_de_cursado
+        return self.ficha.alumno.nombre_completo() + " - Ficha: " + self.ficha.año_de_cursado + " - " + self.asignatura.asignatura
         
+    def primTrimTexto(self):
+        if self.primTrim is None:
+            return " - "
+        else:
+            if self.primTrim%1==0:
+                return round(self.primTrim, 0)
+            else:
+                return self.primTrim
+
+    def seguTrimTexto(self):
+        if self.seguTrim is None:
+            return " - "
+        else:
+            if self.seguTrim%1==0:
+                return round(self.seguTrim, 0)
+            else:
+                return self.seguTrim
+
+    def tercTrimTexto(self):
+        if self.tercTrim is None:
+            return " - "
+        else:
+            if self.tercTrim%1==0:
+                return round(self.tercTrim, 0)
+            else:
+                return self.tercTrim
+
+    def cuarTrimTexto(self):
+        if self.cuarTrim is None:
+            return " - "
+        else:
+            if self.cuarTrim%1==0:
+                return round(self.cuarTrim, 0)
+            else:
+                return self.cuarTrim
+    
+    def promAnual(self):
+        promedio = 0
+        count = 0
+        if self.primTrim is not None:
+                promedio = promedio + self.primTrim
+                count +=1
+        elif self.seguTrim is not None:
+                promedio = promedio + self.seguTrim
+                count +=1
+        elif self.tercTrim is not None:
+                promedio = promedio + self.tercTrim
+                count +=1
+        elif self.cuarTrim is not None:
+                promedio = promedio + self.cuarTrim
+                count +=1
+        try:
+            return promedio/count
+        except ZeroDivisionError:
+            return 0       

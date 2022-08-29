@@ -1,3 +1,4 @@
+
 <h1>{{ alumno.nombre_completo }}</h1>
 <h4>Email: <a href="mailto:{{ alumno.email }}">{{ alumno.email }}</a></h4>
 <h4>DNI: {{ alumno.dni }}</h4>
@@ -8,15 +9,21 @@
     Notas:
     <table border="1">
         <tr align="center">
+            <th>Asignatura</th>
             <th>Primer Trimestre</th>
             <th>Segundo Trimestre</th>
             <th>Tercer Trimestre</th>
+            <th>Cuarto Trimestre</th>
+            <th>Promedio Anual</th>
         </tr>
-        <tr  align="center">
+        
         {% for eval in elige.nota_set.all %}
-        <td>{{ eval.primTrim }}</td>
-        <td>{{ eval.seguTrim }}</td>
-        <td>{{ eval.tercTrim }}</td>
+        <td align="center">{{ eval.asignatura }}</td>
+        <td align="center">{{ eval.primTrimTexto }}</td>
+        <td align="center">{{ eval.seguTrimTexto }}</td>
+        <td align="center">{{ eval.tercTrimTexto }}</td>
+        <td align="center">{{ eval.cuarTrimTexto }}</td>
+        <td align="center">{{ eval.promAnual }}</td>
         </tr>
     {% endfor %}
     </table>
