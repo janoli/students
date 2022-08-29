@@ -66,25 +66,37 @@ class Ficha(models.Model):
     def __str__(self):
         return self.alumno.nombre_completo() + " - " + self.año_de_cursado
 
+    '''
+    TODO: 
+    1) Al inscribirse genera una ficha con todos los pagos futuros.  Como no se
+    tiene un monto exacto de la cuota, se genera simplemente un registro de pago
+    que deberá hacerse después, con el monto que tengan las cuotas.
+
+    2) 
+    '''        
+
 class Pago(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     fecha = models.DateField()
-    primTrim = models.CharField(max_length=1)
-    seguTrim = models.CharField(max_length=1)
-    tercTrim = models.CharField(max_length=1)
 
     def __str__(self):
         return self.ficha.alumno.nombre_completo() + " - " + self.ficha.curso.curso_text
 
+class Asignatura(models.Model):
+    asignatura = models.CharField(max_length=80)
 
-class Notas(models.Model):
+    def __str__(self):
+        return self.asignatura
+
+
+class Nota(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
-    primTrim = models.CharField(max_length=1)
-    seguTrim = models.CharField(max_length=1)
-    tercTrim = models.CharField(max_length=1)
-
-    class Meta:
-        verbose_name_plural = "Notas"
+    asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
+    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
 
     def __str__(self):
-        return self.ficha.alumno.nombre_completo() + " - " + self.ficha.curso.curso_text
+        return self.ficha.año_de_cursado
+        
