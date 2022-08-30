@@ -94,13 +94,13 @@ class Asignatura(models.Model):
 class Nota(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
-    primTrim = models.FloatField(blank=True, null=True,
+    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
         verbose_name='Primer Trimestre')
-    seguTrim = models.FloatField(blank=True, null=True,
+    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
         verbose_name='Segundo Trimestre')
-    tercTrim = models.FloatField(blank=True, null=True,
+    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
         verbose_name='Tercer Trimestre')
-    cuarTrim = models.FloatField(blank=True, null=True,
+    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
         verbose_name='Cuarto Trimestre')
 
     def __str__(self):

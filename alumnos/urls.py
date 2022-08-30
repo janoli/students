@@ -16,5 +16,5 @@ urlpatterns = [
     # ex: /alumnos/5/results/
     path('<int:alumno_id>/results/', views.results, name='results'),
     # ex: /alumnos/5/vote/
-    path('<int:alumno_id>/vote/', views.vote, name='vote'),
+    path('<int:alumno_id>/vote/', views.vote, name='vote')
 ]
