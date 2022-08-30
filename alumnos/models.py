@@ -94,13 +94,13 @@ class Asignatura(models.Model):
 class Nota(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
-    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+    primTrim = models.FloatField(blank=True, null=True,
         verbose_name='Primer Trimestre')
-    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+    seguTrim = models.FloatField(blank=True, null=True,
         verbose_name='Segundo Trimestre')
-    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+    tercTrim = models.FloatField(blank=True, null=True,
         verbose_name='Tercer Trimestre')
-    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+    cuarTrim = models.FloatField(blank=True, null=True,
         verbose_name='Cuarto Trimestre')
 
     def __str__(self):
@@ -148,15 +148,19 @@ class Nota(models.Model):
         if self.primTrim is not None:
                 promedio = promedio + self.primTrim
                 count +=1
-        elif self.seguTrim is not None:
+        
+        if self.seguTrim is not None:
                 promedio = promedio + self.seguTrim
                 count +=1
-        elif self.tercTrim is not None:
+
+        if self.tercTrim is not None:
                 promedio = promedio + self.tercTrim
                 count +=1
-        elif self.cuarTrim is not None:
+        
+        if self.cuarTrim is not None:
                 promedio = promedio + self.cuarTrim
                 count +=1
+
         try:
             return promedio/count
         except ZeroDivisionError:
