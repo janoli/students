@@ -94,18 +94,57 @@ class Asignatura(models.Model):
 class Nota(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
     asignatura = models.ForeignKey(Asignatura, on_delete=models.CASCADE)
-    primTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
-        verbose_name='Primer Trimestre')
-    seguTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
-        verbose_name='Segundo Trimestre')
-    tercTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
-        verbose_name='Tercer Trimestre')
-    cuarTrim = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
-        verbose_name='Cuarto Trimestre')
+    
+    
+    '''
+        FRESHMAN = 'FR'
+    SOPHOMORE = 'SO'
+    JUNIOR = 'JR'
+    SENIOR = 'SR'
+    GRADUATE = 'GR'
+    YEAR_IN_SCHOOL_CHOICES = [
+        (FRESHMAN, 'Freshman'),
+        (SOPHOMORE, 'Sophomore'),
+        (JUNIOR, 'Junior'),
+        (SENIOR, 'Senior'),
+        (GRADUATE, 'Graduate'),
+    ]
+    year_in_school = models.CharField(
+        max_length=2,
+        choices=YEAR_IN_SCHOOL_CHOICES,
+        default=FRESHMAN,
+    )
+    '''
+
+
+    PRIMERO = '1'
+    SEGUNDO = '2'
+    TERCERO = '3'
+    CUARTO = '4'
+    TRIMESTRE_CHOICES = [
+        (PRIMERO, '1º TRIMESTRE'),
+        (SEGUNDO, '2º TRIMESTRE'),
+        (TERCERO, '3º TRIMESTRE'),
+        (CUARTO, '4º TRIMESTRE'),
+    ]
+    trimestre = models.CharField(
+        max_length=1,
+        choices=TRIMESTRE_CHOICES,
+        default="1º Trimestre",
+    )       
+    
+    # trimestre = OPTIONS
+    # valor = decimalField
+    valor = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True,
+        verbose_name='Nota / Inasistencia')
+    
 
     def __str__(self):
         return self.ficha.alumno.nombre_completo() + " - Ficha: " + self.ficha.año_de_cursado + " - " + self.asignatura.asignatura
-        
+
+
+    #' Esto era por si usaba un campo para cada trimestre'
+    '''
     def primTrimTexto(self):
         if self.primTrim is None:
             return " - "
@@ -165,3 +204,4 @@ class Nota(models.Model):
             return promedio/count
         except ZeroDivisionError:
             return 0       
+    '''    

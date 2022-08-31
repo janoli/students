@@ -22,3 +22,9 @@ alumnos/__pycache__/urls.cpython-310.pyc
 alumnos/__pycache__/views.cpython-310.pyc
 alumnos/migrations/0004_auto_20220830_1131.py
 alumnos/migrations/__pycache__/0004_auto_20220830_1131.cpython-310.pyc
+alumnos/__pycache__/models.cpython-310.pyc
+alumnos/migrations/0005_nota_trimestre.py
+alumnos/migrations/0006_auto_20220831_1238.py
+alumnos/migrations/__pycache__/0005_nota_trimestre.cpython-310.pyc
+alumnos/migrations/__pycache__/0006_auto_20220831_1238.cpython-310.pyc
+mysite/__pycache__/urls.cpython-310.pyc

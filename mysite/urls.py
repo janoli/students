@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 #from django.conf.urls import include
 
+admin.site.site_header = 'Instituto de Idioma'
+
 urlpatterns = [
     path('alumnos/', include('alumnos.urls')),
     path('admin/', admin.site.urls),
