@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Alumno, Curso, CicloLectivo, Ficha, Nota, Pago, Asignatura
+from .models import Alumno, Curso, CicloLectivo, Ficha, Nota, Pago
 
 # Register your models here.
  
@@ -45,5 +45,4 @@ admin.site.register(Curso)
 admin.site.register(Ficha, FichaAdmin)
 admin.site.register(Nota)
 admin.site.register(Pago)
-admin.site.register(Asignatura)
 #admin.site.register(CicloLectivoAdmin)

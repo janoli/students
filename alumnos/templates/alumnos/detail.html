@@ -9,21 +9,23 @@
     Notas:
     <table border="1">
         <tr align="center">
-            <th>Asignatura</th>
-            <th>Primer Trimestre</th>
-            <th>Segundo Trimestre</th>
-            <th>Tercer Trimestre</th>
-            <th>Cuarto Trimestre</th>
-            <th>Promedio Anual</th>
+            <th>Bimestre</th>
+            <th>Examen Bimestral</th>
+            <th>Ejercitación Oral</th>
+            <th>Ejercitación Escrita</th>
+            <th>Literatura</th>
+            <th>Conducta</th>
+            <th>Inasistencias</th>
         </tr>
         
         {% for eval in elige.nota_set.all %}
-        <td align="center">{{ eval.asignatura }}</td>
-        <td align="center">{{ eval.valor }}</td>
-        <td align="center">{{ eval.seguTrimTexto }}</td>
-        <td align="center">{{ eval.tercTrimTexto }}</td>
-        <td align="center">{{ eval.cuarTrimTexto }}</td>
-        <td align="center">{{ eval.promAnual }}</td>
+        <td align="center">{{ eval.txtTrimestre }}</td>
+        <td align="center">{{ eval.examen_bimestral }}</td>
+        <td align="center">{{ eval.ejercitacion_oral }}</td>
+        <td align="center">{{ eval.ejercitacion_escrita }}</td>
+        <td align="center">{{ eval.literatura }}</td>
+        <!--td align="center">{{ eval.conducta }}</td>
+        <td align="center">{{ eval.inasistencias }}</td-->
         </tr>
     {% endfor %}
     </table>

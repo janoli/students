@@ -5,17 +5,37 @@
     <title>Aplicacion Alumnos</title>  
     {% load static %}  
     <link href="{% static 'css/bootstrap.min.css' %}" >  
-    <script src="{% static 'bootstrap.min.js' %}"></script>  
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>  
     <!--script>alert();</script-->  
 </head>  
 <body>  
     
     {% if latest_alumno_list %}
-    <ul>
-    {% for alumno in latest_alumno_list %}
-        <li><a href="/alumnos/{{ alumno.id }}/">{{ alumno.nombre_completo }}</a></li>
-    {% endfor %}
-    </ul>
+    
+    <table class="table-secondary table-bordered">
+        <thead>
+            <tr>
+                <th> Nombre </th>
+                <th> DNI </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for alumno in latest_alumno_list %}
+            <tr class="table-secondary">
+                <th scope="col">
+                    <a href="/alumnos/{{ alumno.id }}/">{{ alumno.nombre_completo }}</a>
+                </th>
+                <td class="table-warning">
+                    {{ alumno.dni }}
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>    
+    
+    
 {% else %}
     <p>No alumnos are available.</p>
 {% endif %}
