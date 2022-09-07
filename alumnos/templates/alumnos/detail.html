@@ -11,6 +11,7 @@
         <tr align="center">
             <th>Bimestre</th>
             <th>Examen Bimestral</th>
+            <th>Concepto</th>
             <th>Ejercitación Oral</th>
             <th>Ejercitación Escrita</th>
             <th>Literatura</th>
@@ -21,11 +22,12 @@
         {% for eval in elige.nota_set.all %}
         <td align="center">{{ eval.txtTrimestre }}</td>
         <td align="center">{{ eval.examen_bimestral }}</td>
+        <td align="center">{{ eval.concepto }}</td>
         <td align="center">{{ eval.ejercitacion_oral }}</td>
         <td align="center">{{ eval.ejercitacion_escrita }}</td>
         <td align="center">{{ eval.literatura }}</td>
-        <!--td align="center">{{ eval.conducta }}</td>
-        <td align="center">{{ eval.inasistencias }}</td-->
+        <td align="center">{{ eval.txtConducta }}</td>
+        <td align="center">{{ eval.inasistencia }}</td>
         </tr>
     {% endfor %}
     </table>

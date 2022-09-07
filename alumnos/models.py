@@ -1,4 +1,8 @@
+from ast import NodeVisitor
 from audioop import avg
+from email.utils import decode_rfc2231
+from hashlib import algorithms_available
+from tabnanny import verbose
 from django.db import models
 from django.contrib import admin
 from django.utils import timezone
@@ -77,9 +81,27 @@ class Ficha(models.Model):
     2) 
     '''        
 
-class Pago(models.Model):
+class Talones_de_pago(models.Model):
     ficha = models.ForeignKey(Ficha, on_delete=models.CASCADE)
-    fecha = models.DateField()
+     #mes = models.IntegerField()
+    mar = models.IntegerField(default=0)
+    abr = models.IntegerField(default=0)
+    may = models.IntegerField(default=0)
+    jun = models.IntegerField(default=0)
+'''
+    jul
+    ago 
+    set 
+    oct 
+    nov 
+    de1 
+    de2 
+ '''
+
+    class Meta:
+        #ordering = ["horn_length"]
+        verbose_name = "Talón de Pago"
+        verbose_name_plural = "Talones de Pago"
 
     def __str__(self):
         return self.ficha.alumno.nombre_completo() + " - " + self.ficha.curso.curso_text
@@ -111,7 +133,27 @@ class Nota(models.Model):
     ejercitacion_escrita = models.DecimalField(max_digits=4, decimal_places=2, blank=True, 
         null=True, verbose_name="Ejercitación Escrita")
     literatura = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
-    
+    # conducta = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+
+    SC = '1'
+    EXCELENTE = '2'
+    MUY_BUENA = '3'
+    BUENA = '4'
+    MALA = '5'
+    CONDUCTA_CHOICES = [
+        (SC, 'SIN CALIFICAR'),
+        (EXCELENTE, 'EXCELENTE'),
+        (MUY_BUENA, 'MUY BUENA'),
+        (BUENA, 'BUENA'),
+        (MALA, 'MALA'),        
+    ]
+    conducta = models.CharField(
+        max_length=1,
+        choices=CONDUCTA_CHOICES,
+        default="SIN CALIFICAR",        
+    )       
+
+    inasistencia = models.IntegerField(default=0)
     '''
         FRESHMAN = 'FR'
     SOPHOMORE = 'SO'
@@ -155,3 +197,14 @@ class Nota(models.Model):
         elif self.trimestre == "4":
             return "CUARTO"
 
+    def txtConducta(self):
+        if self.conducta == "1":
+            return "SIN CALIFICAR"
+        elif self.conducta == "2":
+            return "EXCELENTE"
+        elif self.conducta == "3":
+            return "MUY BUENA"
+        elif self.conducta == "4":
+            return "BUENA"
+        elif self.conducta == "5":
+            return "MALA"            
