@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Alumno, Curso, CicloLectivo, Ficha, Nota, Talones_de_pago
+from .models import Alumno, Curso, CicloLectivo, Ficha, Nota, Talones_de_pago, Valor_cuota
 
 # Register your models here.
  
@@ -12,6 +12,9 @@ class NotaInline(admin.StackedInline):
     model = Nota
     extra = 0
 
+class Talones_de_pagoInline(admin.StackedInline):
+    model = Talones_de_pago
+    extra = 0
 
 class AlumnoAdmin(admin.ModelAdmin):
     #fields = ['apellido', 'nombre', 'dni', 'pub_date']
@@ -27,10 +30,10 @@ class CicloLectivoAdmin(admin.ModelAdmin):
 
 class FichaAdmin(admin.ModelAdmin):
     #fields = ['apellido', 'nombre', 'dni', 'pub_date']
-    #list_display =  ('apellido', 'nombre', 'dni')
+    list_display =  ('alumno', 'año_de_cursado', 'curso')
     #search_fields = ['apellido']
 
-    inlines = [NotaInline]
+    inlines = [NotaInline, Talones_de_pagoInline]
     list_filter = ['año_de_cursado', 'curso']
 
 class PagoAdmin(admin.ModelAdmin):
@@ -45,5 +48,6 @@ admin.site.register(Curso)
 admin.site.register(Ficha, FichaAdmin)
 admin.site.register(Nota)
 admin.site.register(Talones_de_pago)
+admin.site.register(Valor_cuota)
 
 #admin.site.register(CicloLectivoAdmin)

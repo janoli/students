@@ -2,6 +2,8 @@ from ast import NodeVisitor
 from audioop import avg
 from email.utils import decode_rfc2231
 from hashlib import algorithms_available
+from re import T
+from statistics import mode
 from tabnanny import verbose
 from django.db import models
 from django.contrib import admin
@@ -62,7 +64,19 @@ class Curso(models.Model):
         verbose_name='Ciclo Lectivo')
     
     def __str__(self):
-        return self.curso_text + " - " + self.cicloLectivo.año
+        return self.curso_text #+ " - " + self.cicloLectivo.año
+
+class Valor_cuota(models.Model):
+    curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
+    fecha_desde = models.DateField(auto_now_add=True)
+    monto = models.DecimalField(decimal_places=2,blank=True, null=True, max_digits=8)
+
+    class Meta:
+        #ordering = ["horn_length"]
+        verbose_name_plural = "Valor Cuota"
+
+    def __str__(self):
+        return self.curso.curso_text
 
 class Ficha(models.Model):
     año_de_cursado = models.CharField(max_length=4)
@@ -70,7 +84,10 @@ class Ficha(models.Model):
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE )
 
     def __str__(self):
-        return self.alumno.nombre_completo() + " - " + self.año_de_cursado
+        return self.alumno.nombre_completo() + " - " + self.año_de_cursado + " - " + self.curso.curso_text
+
+    class Meta:
+        ordering = ["alumno"]
 
     '''
     TODO: 
@@ -88,15 +105,6 @@ class Talones_de_pago(models.Model):
     abr = models.IntegerField(default=0)
     may = models.IntegerField(default=0)
     jun = models.IntegerField(default=0)
-'''
-    jul
-    ago 
-    set 
-    oct 
-    nov 
-    de1 
-    de2 
- '''
 
     class Meta:
         #ordering = ["horn_length"]
