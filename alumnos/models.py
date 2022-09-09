@@ -76,7 +76,7 @@ class Valor_cuota(models.Model):
         verbose_name_plural = "Valor Cuota"
 
     def __str__(self):
-        return self.curso.curso_text
+        return self.curso.curso_text + " - " + self.curso.cicloLectivo.año
 
 class Ficha(models.Model):
     año_de_cursado = models.CharField(max_length=4)
@@ -190,6 +190,7 @@ class Nota(models.Model):
 
     class Meta:
         ordering = ['trimestre']
+        unique_together = ['ficha', 'trimestre']
 
     def __str__(self):
         return self.ficha.alumno.nombre_completo() + " - Ficha: " + self.ficha.año_de_cursado + " - " + self.txtTrimestre() + " TRIMESTRE"

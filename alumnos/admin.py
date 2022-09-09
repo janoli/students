@@ -41,12 +41,20 @@ class PagoAdmin(admin.ModelAdmin):
     list_display =  ('ficha','fecha')
     #list_filter = ['año']
 
+class NotaAdmin(admin.ModelAdmin):
+    #fields = ['apellido', 'nombre', 'dni', 'pub_date']
+    list_display =  ('ficha', 'trimestre')
+    #search_fields = ['apellido', 'dni']
+
+    list_filter = ['trimestre']
+
+
 
 admin.site.register(Alumno, AlumnoAdmin)
 admin.site.register(CicloLectivo, CicloLectivoAdmin)
 admin.site.register(Curso)
 admin.site.register(Ficha, FichaAdmin)
-admin.site.register(Nota)
+admin.site.register(Nota, NotaAdmin)
 admin.site.register(Talones_de_pago)
 admin.site.register(Valor_cuota)
 

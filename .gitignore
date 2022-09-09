@@ -54,3 +54,7 @@ alumnos/migrations/0011_alter_valor_cuota_monto.py
 alumnos/migrations/__pycache__/0009_auto_20220907_1149.cpython-310.pyc
 alumnos/migrations/__pycache__/0010_valor_cuota.cpython-310.pyc
 alumnos/migrations/__pycache__/0011_alter_valor_cuota_monto.cpython-310.pyc
+alumnos/__pycache__/admin.cpython-310.pyc
+alumnos/__pycache__/models.cpython-310.pyc
+alumnos/migrations/0012_auto_20220909_1231.py
+alumnos/migrations/__pycache__/0012_auto_20220909_1231.cpython-310.pyc
